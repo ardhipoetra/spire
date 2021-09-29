@@ -14,7 +14,7 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/hashicorp/hcl"
-	"github.com/jinzhu/gorm"
+	"github.com/ardhipoetra/gorm"
 	"github.com/sirupsen/logrus"
 
 	"github.com/spiffe/go-spiffe/v2/spiffeid"

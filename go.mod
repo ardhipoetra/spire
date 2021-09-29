@@ -29,6 +29,7 @@ require (
 	github.com/OneOfOne/xxhash v1.2.8 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/andres-erbsen/clock v0.0.0-20160526145045-9e14626cd129
+	github.com/ardhipoetra/gorm v1.9.17
 	github.com/armon/go-metrics v0.3.9
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/aws/aws-sdk-go v1.40.44
@@ -100,7 +101,6 @@ require (
 	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/imdario/mergo v0.3.12
 	github.com/imkira/go-observer v1.0.3
-	github.com/jinzhu/gorm v1.9.16
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.11 // indirect
@@ -184,4 +184,11 @@ require (
 	sigs.k8s.io/controller-runtime v0.10.0
 	sigs.k8s.io/structured-merge-diff/v4 v4.1.2 // indirect
 	sigs.k8s.io/yaml v1.2.0 // indirect
+)
+
+require (
+	github.com/Rican7/retry v0.1.0 // indirect
+	github.com/ardhipoetra/go-dqlite v1.8.1-0.20210920143906-5fdfa73052b3 // indirect
+	github.com/google/renameio v1.0.1 // indirect
+	github.com/jinzhu/gorm v1.9.16 // indirect
 )

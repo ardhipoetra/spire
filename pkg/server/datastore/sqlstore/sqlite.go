@@ -6,12 +6,12 @@ import (
 	"errors"
 	"net/url"
 
-	"github.com/jinzhu/gorm"
+	"github.com/ardhipoetra/gorm"
 	"github.com/mattn/go-sqlite3"
 	"github.com/sirupsen/logrus"
 
 	// gorm sqlite dialect init registration
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	_ "github.com/ardhipoetra/gorm/dialects/sqlite"
 )
 
 type sqliteDB struct {

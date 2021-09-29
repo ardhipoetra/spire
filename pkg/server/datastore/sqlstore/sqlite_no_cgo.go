@@ -5,7 +5,7 @@ package sqlstore
 import (
 	"errors"
 
-	"github.com/jinzhu/gorm"
+	"github.com/ardhipoetra/gorm"
 	"github.com/sirupsen/logrus"
 )
 
