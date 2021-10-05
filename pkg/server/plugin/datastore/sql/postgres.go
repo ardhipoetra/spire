@@ -1,11 +1,11 @@
 package sql
 
 import (
-	"github.com/jinzhu/gorm"
+	"github.com/ardhipoetra/gorm"
 	"github.com/lib/pq"
 
 	// gorm postgres dialect init registration
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/ardhipoetra/gorm/dialects/postgres"
 )
 
 type postgresDB struct{}
