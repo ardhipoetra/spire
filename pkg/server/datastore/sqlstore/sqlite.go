@@ -4,14 +4,15 @@ package sqlstore
 
 import (
 	"errors"
-	"net/url"
+	"strings"
+	// "net/url"
 
 	"github.com/ardhipoetra/gorm"
 	"github.com/mattn/go-sqlite3"
 	"github.com/sirupsen/logrus"
 
 	// gorm sqlite dialect init registration
-	_ "github.com/ardhipoetra/gorm/dialects/sqlite"
+	_ "github.com/ardhipoetra/gorm/dialects/dqlite"
 )
 
 type sqliteDB struct {
@@ -23,7 +24,7 @@ func (s sqliteDB) connect(cfg *configuration, isReadOnly bool) (db *gorm.DB, ver
 		s.log.Warn("Read-only connection is not applicable for sqlite3. Falling back to primary connection")
 	}
 
-	db, err = openSQLite3(cfg.ConnectionString)
+	db, err = openSQLite3(cfg.ConnectionString, s)
 	if err != nil {
 		return nil, "", false, err
 	}
@@ -46,12 +47,22 @@ func (s sqliteDB) isConstraintViolation(err error) bool {
 	return ok && e.Code == sqlite3.ErrConstraint
 }
 
-func openSQLite3(connString string) (*gorm.DB, error) {
-	embellished, err := embellishSQLite3ConnString(connString)
-	if err != nil {
-		return nil, err
+func openSQLite3(connString string, s sqliteDB) (*gorm.DB, error) {
+	// embellished, err := embellishSQLite3ConnString(connString)
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	spl := strings.Split(connString, ",")
+	if len(spl) < 1 {
+		s.log.Error("Error")	
+	} else if len(spl) == 1 {
+		s.log.Warn("Leader only?")	
+	} else {
+		s.log.Info("Connect to ", spl)					
 	}
-	db, err := gorm.Open("sqlite3", embellished)
+
+	db, err := gorm.Open("dqlite", spl[0], spl[1:])
 	if err != nil {
 		return nil, sqlError.Wrap(err)
 	}
@@ -63,29 +74,29 @@ func openSQLite3(connString string) (*gorm.DB, error) {
 // These query values MUST be part of the connection string in order to be
 // enabled for *each* connection opened by db/sql. If the connection string is
 // not already a file: URI, it is converted first.
-func embellishSQLite3ConnString(connectionString string) (string, error) {
-	u, err := url.Parse(connectionString)
-	if err != nil {
-		return "", sqlError.Wrap(err)
-	}
+// func embellishSQLite3ConnString(connectionString string) (string, error) {
+// 	u, err := url.Parse(connectionString)
+// 	if err != nil {
+// 		return "", sqlError.Wrap(err)
+// 	}
 
-	switch {
-	case u.Scheme == "":
-		// connection string is a path. move the path section into the
-		// opaque section so it renders property for sqlite3, for example:
-		// data.db = file:data.db
-		// ./data.db = file:./data.db
-		// /data.db = file:/data.db
-		u.Scheme = "file"
-		u.Opaque, u.Path = u.Path, ""
-	case u.Scheme != "file":
-		// only no scheme (i.e. file path) or file scheme is supported
-		return "", sqlError.New("unsupported scheme %q", u.Scheme)
-	}
+// 	switch {
+// 	case u.Scheme == "":
+// 		// connection string is a path. move the path section into the
+// 		// opaque section so it renders property for sqlite3, for example:
+// 		// data.db = file:data.db
+// 		// ./data.db = file:./data.db
+// 		// /data.db = file:/data.db
+// 		u.Scheme = "file"
+// 		u.Opaque, u.Path = u.Path, ""
+// 	case u.Scheme != "file":
+// 		// only no scheme (i.e. file path) or file scheme is supported
+// 		return "", sqlError.New("unsupported scheme %q", u.Scheme)
+// 	}
 
-	q := u.Query()
-	q.Set("_foreign_keys", "ON")
-	q.Set("_journal_mode", "WAL")
-	u.RawQuery = q.Encode()
-	return u.String(), nil
-}
+// 	q := u.Query()
+// 	q.Set("_foreign_keys", "ON")
+// 	q.Set("_journal_mode", "WAL")
+// 	u.RawQuery = q.Encode()
+// 	return u.String(), nil
+// }
