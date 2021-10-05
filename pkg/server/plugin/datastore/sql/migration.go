@@ -9,7 +9,7 @@ import (
 
 	"github.com/blang/semver"
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/jinzhu/gorm"
+	"github.com/ardhipoetra/gorm"
 	"github.com/spiffe/spire/pkg/common/bundleutil"
 	"github.com/spiffe/spire/pkg/common/idutil"
 	"github.com/spiffe/spire/pkg/common/telemetry"

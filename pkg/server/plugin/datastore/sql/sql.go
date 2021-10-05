@@ -14,9 +14,9 @@ import (
 	"github.com/gofrs/uuid"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/hcl"
-	"github.com/jinzhu/gorm"
+	"github.com/ardhipoetra/gorm"
 
-	_ "github.com/jinzhu/gorm/dialects/sqlite" // gorm sqlite dialect init registration
+	_ "github.com/ardhipoetra/gorm/dialects/sqlite" // gorm sqlite dialect init registration
 	"github.com/spiffe/spire/pkg/common/bundleutil"
 	"github.com/spiffe/spire/pkg/common/catalog"
 	"github.com/spiffe/spire/pkg/common/idutil"

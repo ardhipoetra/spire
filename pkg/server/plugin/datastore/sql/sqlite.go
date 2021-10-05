@@ -4,11 +4,11 @@ import (
 	"net/url"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/jinzhu/gorm"
+	"github.com/ardhipoetra/gorm"
 	"github.com/mattn/go-sqlite3"
 
 	// gorm sqlite dialect init registration
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	_ "github.com/ardhipoetra/gorm/dialects/sqlite"
 )
 
 type sqliteDB struct {
