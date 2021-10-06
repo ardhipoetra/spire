@@ -18,7 +18,8 @@ require (
 	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/andres-erbsen/clock v0.0.0-20160526145045-9e14626cd129
-	github.com/ardhipoetra/gorm v1.9.17
+	github.com/ardhipoetra/go-dqlite v1.7.2-0.20211007092211-c6c3f4078dad
+	github.com/ardhipoetra/gorm v1.9.10-0.20211007092440-421b11603eae
 	github.com/armon/go-metrics v0.3.2
 	github.com/aws/aws-sdk-go v1.28.9
 	github.com/blang/semver v3.5.1+incompatible
