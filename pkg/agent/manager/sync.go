@@ -80,9 +80,9 @@ func (m *manager) synchronize(ctx context.Context) (err error) {
 		}).Debug("Renewing stale entries")
 		for _, staleEntry := range staleEntries {
 			// we've exceeded the CSR limit, don't make any more CSRs
-			if len(csrs) >= node.CSRLimit {
-				break
-			}
+			// if len(csrs) >= node.CSRLimit {
+			// 	break
+			// }
 
 			csrs = append(csrs, csrRequest{
 				EntryID:              staleEntry.Entry.EntryId,
@@ -91,6 +91,7 @@ func (m *manager) synchronize(ctx context.Context) (err error) {
 			})
 		}
 
+		log.WithField("csrs", len(csrs)).Debug("Will fetch svid")
 		update, err := m.fetchSVIDs(ctx, csrs)
 		if err != nil {
 			return err

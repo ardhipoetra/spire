@@ -47,7 +47,9 @@ func WithFormat(format string) Option {
 		case DefaultFormat:
 			// Logrus has a default formatter set up in logrus.New(), so we don't change it
 		case JSONFormat:
-			logger.Formatter = &logrus.JSONFormatter{}
+			logger.Formatter = &logrus.JSONFormatter{
+				TimestampFormat: "2006-01-02T15:04:05.000",
+			}
 		case TextFormat:
 			logger.Formatter = &logrus.TextFormatter{}
 		default:

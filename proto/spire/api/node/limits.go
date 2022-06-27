@@ -5,7 +5,7 @@ const (
 	// Requests containing more than this number of
 	// operations will always be rejected
 	AttestLimit     int = 1
-	CSRLimit        int = 500
+	CSRLimit        int = 10000
 	JSRLimit        int = 500
 	PushJWTKeyLimit int = 500
 )

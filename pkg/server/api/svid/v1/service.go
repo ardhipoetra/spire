@@ -146,6 +146,7 @@ func (s *Service) BatchNewX509SVID(ctx context.Context, req *svid.BatchNewX509SV
 		//  Create new SVID
 		results = append(results, s.newX509SVID(ctx, svidParam, entriesMap))
 	}
+	log.WithField("results", len(results)).Info("Done update svids")
 
 	return &svid.BatchNewX509SVIDResponse{Results: results}, nil
 }
