@@ -91,7 +91,7 @@ func (m *manager) synchronize(ctx context.Context) (err error) {
 			})
 		}
 
-		log.WithField("csrs", len(csrs)).Debug("Will fetch svid")
+		m.c.Log.WithField("csrs", len(csrs)).Debug("Will fetch svid")
 		update, err := m.fetchSVIDs(ctx, csrs)
 		if err != nil {
 			return err
