@@ -35,6 +35,7 @@ func Dial(socketPath string) (*grpc.ClientConn, error) {
 		grpc.WithInsecure(),
 		grpc.WithContextDialer(dialer),
 		grpc.WithBlock(),
+		grpc.WithDefaultCallOptions(grpc.MaxCallSendMsgSize(32*10e6), grpc.MaxCallRecvMsgSize(32*10e6)),
 		grpc.FailOnNonTempDialError(true),
 		grpc.WithReturnConnectionError())
 }

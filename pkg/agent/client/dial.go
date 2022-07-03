@@ -68,6 +68,7 @@ func DialServer(ctx context.Context, config DialServerConfig) (*grpc.ClientConn,
 	client, err := config.dialContext(ctx, config.Address,
 		grpc.WithBalancerName(roundrobin.Name), //nolint:staticcheck
 		grpc.FailOnNonTempDialError(true),
+		grpc.WithDefaultCallOptions(grpc.MaxCallSendMsgSize(32*10e6), grpc.MaxCallRecvMsgSize(32*10e6)),
 		grpc.WithBlock(),
 		grpc.WithReturnConnectionError(),
 		grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)),

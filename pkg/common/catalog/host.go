@@ -10,6 +10,7 @@ import (
 
 func NewHostServer(pluginName string, opts []grpc.ServerOption, hostServices []HostServiceServer) *grpc.Server {
 	s := grpc.NewServer(append(opts,
+		grpc.MaxSendMsgSize(1024*1024*50), grpc.MaxRecvMsgSize(1024*1024*50),
 		grpc.ChainStreamInterceptor(
 			streamPanicInterceptor,
 			streamPluginInterceptor(pluginName),

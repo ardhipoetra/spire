@@ -175,6 +175,7 @@ func (e *Endpoints) createTCPServer(ctx context.Context, unaryInterceptor grpc.U
 	}
 
 	return grpc.NewServer(
+		grpc.MaxSendMsgSize(1024*1024*50), grpc.MaxRecvMsgSize(1024*1024*50),
 		grpc.UnaryInterceptor(unaryInterceptor),
 		grpc.StreamInterceptor(streamInterceptor),
 		grpc.Creds(credentials.NewTLS(tlsConfig)),
@@ -186,6 +187,7 @@ func (e *Endpoints) createTCPServer(ctx context.Context, unaryInterceptor grpc.U
 
 func (e *Endpoints) createUDSServer(unaryInterceptor grpc.UnaryServerInterceptor, streamInterceptor grpc.StreamServerInterceptor) *grpc.Server {
 	return grpc.NewServer(
+		grpc.MaxSendMsgSize(1024*1024*50), grpc.MaxRecvMsgSize(1024*1024*50),
 		grpc.UnaryInterceptor(unaryInterceptor),
 		grpc.StreamInterceptor(streamInterceptor),
 		grpc.Creds(auth.UntrackedUDSCredentials()))
