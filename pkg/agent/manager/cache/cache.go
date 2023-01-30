@@ -378,6 +378,7 @@ func (c *Cache) UpdateSVIDs(update *UpdateSVIDs) {
 	defer selSetDone()
 
 	// Add/update records for registration entries in the update
+	c.log.WithField("results", len(update.X509SVIDs)).Info("Will update SVID")
 	for entryID, svid := range update.X509SVIDs {
 		record, existingEntry := c.records[entryID]
 		if !existingEntry {
