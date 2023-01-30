@@ -113,6 +113,7 @@ func (m *manager) fetchSVIDs(ctx context.Context, csrs []csrRequest) (_ *cache.U
 	csrsIn := make(map[string][]byte)
 
 	privateKeys := make(map[string]*ecdsa.PrivateKey, len(csrs))
+	m.c.Log.WithField("csrs", len(csrs)).Info("Renewing SVID (csrs)")
 	for _, csr := range csrs {
 		log := m.c.Log.WithField("spiffe_id", csr.SpiffeID)
 		if !csr.CurrentSVIDExpiresAt.IsZero() {
@@ -125,7 +126,7 @@ func (m *manager) fetchSVIDs(ctx context.Context, csrs []csrRequest) (_ *cache.U
 			continue
 		}
 
-		log.Info("Renewing X509-SVID")
+		log.Debug("Renewing X509-SVID")
 		privateKey, csrBytes, err := newCSR(csr.SpiffeID)
 		if err != nil {
 			return nil, err
