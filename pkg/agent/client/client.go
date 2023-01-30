@@ -307,6 +307,7 @@ func (c *client) fetchEntries(ctx context.Context) ([]*types.Entry, error) {
 		return nil, err
 	}
 	defer connection.Release()
+	ctx, _ = context.WithTimeout(ctx, time.Duration(5000) * time.Millisecond)
 
 	resp, err := entryClient.GetAuthorizedEntries(ctx, &entrypb.GetAuthorizedEntriesRequest{})
 	if err != nil {
